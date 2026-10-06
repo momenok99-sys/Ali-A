@@ -1,0 +1,16 @@
+:root{--display-leading:.86}
+
+/* Oversized, multiline editorial display type only. */
+.hero h1,
+.film-title,
+.studio-hero h1,
+.index-hero h1,
+.about-hero h1,
+.feature-overlay h2,
+.about-hero-title h1,
+.about-final-cta a,
+.footer-cta,
+.advisory-hero h1,
+.page-cta h2{line-height:var(--display-leading)}
+
+@media(max-width:600px){:root{--display-leading:.89}}

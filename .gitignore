@@ -1,0 +1,14 @@
+node_modules/
+.next/
+out/
+build/
+coverage/
+*.tsbuildinfo
+.vercel/
+.env*
+!.env.example
+.chrome-cdp-qa/
+.qa-browser*/
+.tmp-properties.html
+qa-home-*.png
+qa-about-*.png

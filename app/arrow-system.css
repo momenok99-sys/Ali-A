@@ -1,0 +1,62 @@
+.ui-arrow-up-right {
+  display: inline-block;
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px;
+  flex: 0 0 14px;
+  overflow: visible;
+  vertical-align: -0.12em;
+  transform: translate(0, 0);
+  transition: transform 300ms cubic-bezier(.22, 1, .36, 1) !important;
+}
+
+.ui-arrow-up-right path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.65px !important;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+:is(a, button):has(> .ui-arrow-up-right) {
+  column-gap: .65rem;
+}
+
+:is(a, button):hover > .ui-arrow-up-right,
+:is(a, button):focus-visible > .ui-arrow-up-right {
+  transform: translate(2px, -2px) !important;
+}
+
+.footer-cta,
+.about-conversation > a,
+.about-focus nav a,
+.studio-conversion nav a,
+.intent-panel nav a,
+.page-cta a {
+  justify-content: flex-start !important;
+}
+
+/* Deliberate hierarchy exception: the major footer conversation CTA. */
+.footer-cta-editorial {
+  justify-content: space-between !important;
+}
+
+.footer-cta-editorial > .ui-arrow-up-right-editorial {
+  width: 46px !important;
+  height: 46px !important;
+  min-width: 46px;
+  flex-basis: 46px;
+  vertical-align: middle;
+}
+
+.footer-cta-editorial:hover > .ui-arrow-up-right-editorial,
+.footer-cta-editorial:focus-visible > .ui-arrow-up-right-editorial {
+  transform: translate(3px, -3px) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-arrow-up-right {
+    transition: none !important;
+  }
+}

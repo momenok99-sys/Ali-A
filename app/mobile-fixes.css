@@ -1,0 +1,15 @@
+.site-header{mix-blend-mode:normal;background:rgba(16,44,59,.96);backdrop-filter:blur(12px)}
+
+@media(max-width:600px){
+  .hero h1{font-size:clamp(3.2rem,14vw,4.5rem);line-height:.86;letter-spacing:-.045em}
+  .hero-offset b{display:block;font:inherit}
+  .brand-logo{width:5.25rem}
+  .menu-toggle{display:block!important;visibility:visible!important;opacity:1!important;position:fixed;right:var(--pad);top:12px;z-index:110;width:64px;height:44px;color:#fff;border:1px solid rgba(255,255,255,.35)}
+  .hero-actions{gap:1rem}
+  .hero-actions .arrow-link{font-size:.64rem}
+  .hero-actions .arrow-link:nth-child(2){display:none}
+  .index-hero h1{font-size:21vw}
+  .detail-hero h1{font-size:14vw;line-height:.88}
+  .about-hero h1{font-size:18vw;line-height:.82}
+  .contact-heading h1{font-size:13vw;line-height:.92}
+}
