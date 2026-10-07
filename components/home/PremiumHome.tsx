@@ -9,6 +9,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { BedDouble, Building2, ChevronRight, MapPin, Ruler, Search } from "lucide-react";
 import { getPropertyCover, properties } from "@/data/properties";
 import { ArrowUpRight } from "@/components/ui/ArrowUpRight";
+import { SiteIntro } from "./SiteIntro";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -27,14 +28,18 @@ export function PremiumHome() {
   const featured = properties.slice(0, 4);
   useGSAP(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const introSeen = sessionStorage.getItem("ali_intro_seen");
+    const introDelay = introSeen === "1" || introSeen === "true" ? .15 : 4.18;
     gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((node) => gsap.from(node, { y: 42, opacity: 0, duration: 1.15, ease: "power3.out", scrollTrigger: { trigger: node, start: "top 88%", once: true } }));
     gsap.utils.toArray<HTMLElement>("[data-parallax]").forEach((node) => gsap.fromTo(node, { yPercent: -4, scale: 1.045 }, { yPercent: 4, scale: 1.01, ease: "none", scrollTrigger: { trigger: node.parentElement, start: "top bottom", end: "bottom top", scrub: .65 } }));
     gsap.fromTo(heroVideo.current, { scale: 1.025, yPercent: 0 }, { scale: 1.005, yPercent: 2.5, ease: "none", scrollTrigger: { trigger: ".studio-hero", start: "top top", end: "bottom top", scrub: .6 } });
     gsap.to(".studio-hero-copy", { yPercent: 3, ease: "none", scrollTrigger: { trigger: ".studio-hero", start: "top top", end: "bottom top", scrub: .6 } });
-    gsap.from(".studio-hero-copy > *", { y: 34, opacity: 0, duration: 1.1, stagger: .1, delay: .15, ease: "power3.out" });
+    gsap.fromTo(".studio-hero-copy > *", { y: 34, opacity: 0 }, { y: 0, opacity: 1, duration: .72, stagger: .07, delay: introDelay, ease: "power3.out" });
+    gsap.fromTo(".studio-hero-meta, .studio-hero-index", { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: .5, delay: introDelay + .08, ease: "power3.out" });
   }, { scope: root });
   useEffect(()=>{const video=heroVideo.current;if(!video)return;const observer=new IntersectionObserver(([entry])=>{if(entry.isIntersecting)void video.play().catch(()=>{});else video.pause()},{rootMargin:"100px",threshold:.05});observer.observe(video);return()=>observer.disconnect()},[]);
   return <div ref={root} className="studio-home">
+    <SiteIntro heroVideo={heroVideo}/>
     <section className="studio-hero">
       <video ref={heroVideo} src="/videos/file.mp4" poster="/images/properties/address-jbr/cover.png" autoPlay muted loop playsInline preload="metadata" aria-label="Cinematic Dubai residential architecture" />
       <div className="studio-hero-shade" />

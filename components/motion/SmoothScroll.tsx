@@ -10,6 +10,15 @@ gsap.registerPlugin(ScrollTrigger);
 
 let activeLenis: Lenis | null = null;
 
+export function stopActiveSmoothScroll() {
+  activeLenis?.stop();
+}
+
+export function startActiveSmoothScroll() {
+  activeLenis?.start();
+  activeLenis?.resize();
+}
+
 export function SmoothScroll() {
   const pathname = usePathname();
 
@@ -23,7 +32,7 @@ export function SmoothScroll() {
       touchMultiplier: 1,
       anchors: true,
       autoRaf: false,
-      autoToggle: true,
+      autoToggle: false,
       allowNestedScroll: true,
       prevent: (node) => node instanceof HTMLElement && Boolean(node.closest("[data-lenis-prevent]")),
     });

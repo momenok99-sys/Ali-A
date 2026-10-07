@@ -9,11 +9,22 @@ import { ArrowLink } from "@/components/ui/ArrowLink";
 export function Header() {
   const [open, setOpen] = useState(false);
   const button = useRef<HTMLButtonElement>(null);
+  const previousOverflow = useRef<string | null>(null);
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    if (open) {
+      previousOverflow.current = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+    } else if (previousOverflow.current !== null) {
+      document.body.style.overflow = previousOverflow.current;
+      previousOverflow.current = null;
+    }
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") { setOpen(false); button.current?.focus(); } };
     window.addEventListener("keydown", onKey);
-    return () => { document.body.style.overflow = ""; window.removeEventListener("keydown", onKey); };
+    return () => {
+      if (previousOverflow.current !== null) document.body.style.overflow = previousOverflow.current;
+      previousOverflow.current = null;
+      window.removeEventListener("keydown", onKey);
+    };
   }, [open]);
   return <>
     <header className="site-header">
